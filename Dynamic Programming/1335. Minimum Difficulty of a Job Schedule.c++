@@ -47,4 +47,31 @@ public:
         }
         return dp[0][d];
     }
+
+};
+
+class Solution {
+public:
+    int minDifficulty(vector<int>& jobDifficulty, int d) {
+        int n = jobDifficulty.size();
+        if(n < d) return -1;
+        vector<int>prev(n+1,0),curr(n+1,0);
+        for(int i=0; i<n; i++){
+            int maxi = INT_MIN;
+            for(int j=i; j<n; j++) maxi = max(maxi, jobDifficulty[j]);
+            prev[i] = maxi;
+        }
+        for(int day = 2; day <= d; day++){
+            for(int i=0; i<=n-day; i++){
+                int res = INT_MAX, maxi = INT_MIN;
+                for(int j=i; j<=n-day; j++){
+                    maxi = max(maxi, jobDifficulty[j]);
+                    res = min(res, maxi + prev[j+1]);
+                }
+                curr[i] = res;
+            }
+            prev = curr;
+        }
+        return prev[0];
+    }
 };
