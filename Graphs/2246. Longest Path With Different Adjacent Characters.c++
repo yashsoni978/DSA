@@ -5,7 +5,7 @@ private:
         for(int child : adj[node]){
             if(child == parent) continue;
             int childPath = dfs(child, node, adj, s, maxPath);
-            if(s[child] == s[node]) continue;
+            if(s[child] == s[node]) continue; // We dont want adjacent chars to be same
             if(childPath > longestChildPath){
                 secondLongestChildPath = longestChildPath;
                 longestChildPath = childPath;
@@ -27,4 +27,5 @@ public:
         dfs(0, -1, adj, s, maxPath);
         return maxPath;
     }
+
 };
