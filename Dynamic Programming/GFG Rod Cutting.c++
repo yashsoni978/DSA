@@ -70,4 +70,27 @@ class Solution {
     }
 };
 
+// User function Template for C++
+
+class Solution {
+  public:
+    int cutRod(vector<int> &price) {
+        // code here
+        int n = price.size();
+        vector<int>prev(n+1,0);
+        for(int i=0; i<=n; i++) prev[i] = price[0] * i;
+        for(int ind=1; ind<n; ind++){
+            for(int N=0; N<=n; N++){//starting from 1 will also work
+                int notTake = prev[N];
+                int take = INT_MIN;
+                int rodLength = ind+1;
+                if(rodLength <= N) take = price[ind] + prev[N - rodLength];
+                prev[N] = max(take, notTake);
+            }
+        }
+        return prev[n];
+    }
+};
+
+
 
