@@ -41,4 +41,20 @@ public:
         }
         return -1;
     }
+
+};
+
+class Solution {
+public:
+    int specialArray(vector<int>& nums) {
+        int n = nums.size();
+        vector<int>freq(n+1);
+        for(int i=0; i<n; i++) freq[min(n,nums[i])]++;
+        int cumSum = 0;
+        for(int x = n; x >= 0; x--){
+            cumSum += freq[x];
+            if(x == cumSum) return x;
+        }
+        return -1;
+    }
 };
