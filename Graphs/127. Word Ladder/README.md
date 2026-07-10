@@ -1,0 +1,63 @@
+<h2>127. Word Ladder</h2>
+
+<img src="https://img.shields.io/badge/Difficulty-Hard-red" alt="Difficulty: Hard"/>
+
+<hr>
+
+<p>A <strong>transformation sequence</strong> from word <code>beginWord</code> to word <code>endWord</code> using a dictionary <code>wordList</code> is a sequence of words such that:</p>
+
+<ul>
+  <li>The first word in the sequence is <code>beginWord</code>.</li>
+  <li>The last word in the sequence is <code>endWord</code>.</li>
+  <li>Only one letter can be changed at a time.</li>
+  <li>Each transformed word must exist in <code>wordList</code>. The <code>beginWord</code> does not need to be in <code>wordList</code>.</li>
+</ul>
+
+<p>Given two words, <code>beginWord</code> and <code>endWord</code>, and a dictionary <code>wordList</code>, return the <strong>number of words</strong> in the shortest transformation sequence from <code>beginWord</code> to <code>endWord</code>, or <code>0</code> if no such sequence exists.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre>
+<strong>Input:</strong>
+beginWord = "hit"
+endWord = "cog"
+wordList = ["hot","dot","dog","lot","log","cog"]
+
+<strong>Output:</strong>
+5
+
+<strong>Explanation:</strong>
+One shortest transformation sequence is:
+"hit" → "hot" → "dot" → "dog" → "cog"
+
+The sequence contains 5 words.
+</pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre>
+<strong>Input:</strong>
+beginWord = "hit"
+endWord = "cog"
+wordList = ["hot","dot","dog","lot","log"]
+
+<strong>Output:</strong>
+0
+
+<strong>Explanation:</strong>
+The endWord "cog" is not in wordList, so no valid transformation sequence exists.
+</pre>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code>1 &lt;= beginWord.length &lt;= 10</code></li>
+  <li><code>endWord.length == beginWord.length</code></li>
+  <li><code>1 &lt;= wordList.length &lt;= 5000</code></li>
+  <li><code>wordList[i].length == beginWord.length</code></li>
+  <li><code>beginWord</code>, <code>endWord</code>, and <code>wordList[i]</code> consist of lowercase English letters.</li>
+  <li><code>beginWord != endWord</code></li>
+  <li>All the words in <code>wordList</code> are unique.</li>
+</ul>
+
+<p><strong>Follow-up:</strong> Can you solve this problem efficiently using <strong>Breadth-First Search (BFS)</strong> with a hash set to find the shortest transformation sequence?</p>
