@@ -1,0 +1,44 @@
+class Solution {
+  private:
+    int timer = 0;
+  private:
+    void dfs(int node, int parent, vector<int>& vis, vector<int>& tin, vector<int>& low, vector<int>& mark, vector<vector<int>>& adj){
+        vis[node] = 1;
+        low[node] = tin[node] = timer;
+        timer++;
+        int child = 0;
+        for(auto it : adj[node]){
+            if(it == parent) continue;
+            if(!vis[it]){
+                dfs(it, node, vis, tin, low, mark, adj);
+                low[node] = min(low[node], low[it]);
+                if(low[it] >= tin[node] && parent != -1) mark[node] = 1;
+                child++;
+            }
+            else low[node] = min(low[node], tin[it]);
+        }
+        if(child > 1 && parent == -1) mark[node] = 1;
+    }
+  public:
+    vector<int> articulationPoints(int V, vector<vector<int>>& edges) {
+        // Code here
+        vector<vector<int>>adj(V);
+        for(auto &e : edges){
+            adj[e[0]].push_back(e[1]);
+            adj[e[1]].push_back(e[0]);
+        }
+        vector<int>vis(V,0), tin(V), low(V), mark(V,0);
+        for(int i=0; i<V; i++){
+            if(!vis[i]) dfs(i, -1, vis, tin, low, mark, adj);
+        }
+        vector<int>ans;
+        for(int i=0; i<V; i++){
+            if(mark[i] == 1) ans.push_back(i);
+        }
+        if(ans.size() == 0) return {-1};
+        return ans;
+    }
+};
+
+/*TC: O(V + E) — Tarjan's DFS visits each vertex once and processes each edge at most twice to identify articulation points.
+SC: O(V + E) — Uses adjacency list, vis/tin/low/mark arrays, and the recursive DFS call stack.*/
