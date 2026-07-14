@@ -28,3 +28,30 @@ public:
         return cnt;
     }
 };
+
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int V = isConnected.size();
+
+        DisjointSet ds(V);
+
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                if (isConnected[i][j] == 1) {
+                    ds.unionBySize(i, j);
+                }
+            }
+        }
+
+        int cnt = 0;
+        for (int i = 0; i < V; i++) {
+            if (ds.parent[i] == i) cnt++;
+        }
+
+        return cnt;
+    }
+};
+
+/*TC: O(V² × α(V)) ≈ O(V²) — Traverse the V × V adjacency matrix and perform nearly constant-time DSU union/find operations.
+SC: O(V) — Uses parent and size arrays of the Disjoint Set.*/
