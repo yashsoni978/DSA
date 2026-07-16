@@ -43,3 +43,19 @@ public:
 
 /*TC: O(n) — Computes each Fibonacci number once using bottom-up dynamic programming.
 SC: O(n) — Uses a DP array of size n + 1 to store intermediate Fibonacci values.*/
+
+class Solution {
+public:
+    int fib(int n) {
+        if(n <= 1) return n;
+        int prev = 1, prev2 = 0;
+        for(int i=2; i<=n; i++){
+            int curr = prev2 + prev;
+            prev2 = prev;
+            prev = curr;
+        }
+        return prev;
+    }
+};
+/*TC: O(n) — Computes each Fibonacci number once using an iterative approach.
+SC: O(1) — Uses only constant extra space by storing the last two Fibonacci numbers.*/
