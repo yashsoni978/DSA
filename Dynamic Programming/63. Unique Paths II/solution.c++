@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
+        vector<int>prev(n,0);
+        for(int i=0; i<m; i++){
+            vector<int>curr(n,0);
+            for(int j=0; j<n; j++){
+                if(obstacleGrid[i][j] == 1) curr[j] = 0; //obstacle  
+                else if(i == 0 && j == 0) curr[j] = 1;
+                else{
+                    int up = 0;
+                    if(i > 0) up += prev[j];
+                    int left = 0;
+                    if(j > 0) left += curr[j-1];
+                    curr[j] = up + left;
+                }    
+            }
+            prev = curr;
+        }
+        return prev[n-1];
+    }
+};
+
+/*TC: O(m × n) — Processes each grid cell once using space-optimized dynamic programming.
+SC: O(n) — Uses two 1D arrays of size n to store the previous and current row.*/
